@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 background-image: linear-gradient(90deg, rgba(6,1,1,0.68) 0%, rgba(3,15,20,0.69) 100%),url(${Beer}) ;
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
+
   }
 
   input:-webkit-autofill,

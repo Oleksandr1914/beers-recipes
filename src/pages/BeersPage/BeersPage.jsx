@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useBeersRecipes } from "../../store";
 import BeerCard from "../../components/BeerCard/BeerCard";
+import { BeersPageContainer, BeersList } from "./BeersPage.styled";
 
 const BeersPage = () => {
   const {
@@ -32,11 +33,15 @@ const BeersPage = () => {
     }
   }, [sliceBeers, beersRecipes]);
 
-  console.log(beersRecipes, numberFetch);
+  // console.log(beersRecipes, numberFetch);
+  console.log(displayBeers);
   return (
-    <div>
-      <BeerCard />
-    </div>
+    <BeersPageContainer>
+      <BeersList>
+        {displayBeers.length > 0 &&
+          displayBeers?.map((el) => <BeerCard key={el.id} displayBeer={el} />)}
+      </BeersList>
+    </BeersPageContainer>
   );
 };
 
