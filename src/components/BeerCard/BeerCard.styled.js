@@ -11,6 +11,9 @@ export const CardContainer = styled.li`
   padding-bottom: 35px;
   border-radius: 20px;
   background-color: #c7967db5;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const TitleBox = styled.div`

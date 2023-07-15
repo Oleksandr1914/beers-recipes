@@ -1,8 +1,10 @@
 export const truncateString = (inputString) => {
   if (inputString) {
-    var words = inputString.split(" ");
-    var truncatedWords = words.slice(0, 20);
-    var truncatedString = truncatedWords.join(" ");
+    const words = inputString.split(" ");
+    const truncatedWords = words.slice(0, 20);
+    const truncatedString = truncatedWords.join(" ");
+    return truncatedWords.length < 20
+      ? truncatedString
+      : truncatedString + "...";
   }
-  return truncatedString;
 };

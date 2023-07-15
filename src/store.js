@@ -9,8 +9,7 @@ export const useBeersRecipes = create((set, get) => ({
     set((state) => {
       let endIndex = startIndex + 15;
       const displayRecipes = state.beers.slice(startIndex, endIndex);
-      console.log("hi", displayRecipes);
-      return displayRecipes;
+      return { displayBeers: [...displayRecipes] };
     }),
   calcFetch: () =>
     set({
@@ -29,4 +28,12 @@ export const useBeersRecipes = create((set, get) => ({
       set({ error: error.message });
     }
   },
+}));
+
+export const useModalData = create((set) => ({
+  informationCard: {},
+  recornInform: (data) =>
+    set({
+      informationCard: data,
+    }),
 }));

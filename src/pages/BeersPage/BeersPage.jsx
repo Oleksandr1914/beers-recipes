@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBeersRecipes } from "../../store";
 import BeerCard from "../../components/BeerCard/BeerCard";
 import { BeersPageContainer, BeersList } from "./BeersPage.styled";
+import Modal from "../../components/Modal/Modal";
 
 const BeersPage = () => {
+  const [isModal, setIsModal] = useState(false);
   const {
     beersRecipes,
     displayBeers,
@@ -13,7 +15,7 @@ const BeersPage = () => {
     calcFetch,
   } = useBeersRecipes((state) => ({
     beersRecipes: state.beers,
-    displayBeers: state.beers,
+    displayBeers: state.displayBeers,
     fetchBeers: state.fetchBeersRecipes,
     numberFetch: state.numberFetch,
     calcFetch: state.calcFetch,
@@ -27,10 +29,11 @@ const BeersPage = () => {
   }, [fetchBeers, numberFetch]);
 
   useEffect(() => {
-    sliceBeers(10);
+    sliceBeers(0);
     if (displayBeers.length < 15) {
       calcFetch();
     }
+    console.log("123", displayBeers);
   }, [sliceBeers, beersRecipes]);
 
   // console.log(beersRecipes, numberFetch);
@@ -38,9 +41,16 @@ const BeersPage = () => {
   return (
     <BeersPageContainer>
       <BeersList>
-        {displayBeers.length > 0 &&
-          displayBeers?.map((el) => <BeerCard key={el.id} displayBeer={el} />)}
+        {displayBeers?.map((el) => (
+          <BeerCard
+            key={el.id}
+            displayBeer={el}
+            isModal={isModal}
+            setIsModal={setIsModal}
+          />
+        ))}
       </BeersList>
+      {isModal && <Modal setIsModal={setIsModal} />}
     </BeersPageContainer>
   );
 };
