@@ -21,10 +21,10 @@ export const Backdrop = styled.div`
 export const ModalCard = styled.div`
   padding: 20px 40px;
   width: 920px;
-
-  min-height: 680px;
+  height: 720px;
   background-color: #c7967d;
   border-radius: 8px;
+  overflow-y: scroll;
 `;
 
 export const TitleModal = styled.h2`
