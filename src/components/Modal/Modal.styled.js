@@ -19,7 +19,7 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalCard = styled.div`
-  padding: 40px;
+  padding: 20px 40px;
   width: 920px;
 
   min-height: 680px;
