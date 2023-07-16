@@ -8,6 +8,19 @@ export const BeersPageContainer = styled.div`
   height: calc(100vh - 100px);
   overflow-x: hidden;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #c7967d33;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ad846f99;
+    border-radius: 8px;
+  }
 `;
 
 export const BeersList = styled.ul`
@@ -16,4 +29,5 @@ export const BeersList = styled.ul`
   justify-content: space-around;
   gap: 30px;
   width: 1400px;
+  padding-bottom: 80px;
 `;

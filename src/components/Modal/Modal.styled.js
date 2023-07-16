@@ -19,12 +19,25 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalCard = styled.div`
-  padding: 20px 40px;
+  padding: 40px;
   width: 920px;
   height: 680px;
   background-color: #c7967d;
   border-radius: 8px;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #c0927b;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #e4bca7;
+    border-radius: 8px;
+  }
 `;
 
 export const TitleModal = styled.h2`

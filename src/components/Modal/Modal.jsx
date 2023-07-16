@@ -59,7 +59,7 @@ const Modal = ({ setIsModal }) => {
       setIsModal(false);
     }
   };
-  console.log(informationCard);
+
   return createPortal(
     <Backdrop onClick={handleBackdropClick}>
       <ModalCard>

@@ -1,4 +1,5 @@
-import { useModalData } from "../../store";
+import { useEffect, useState } from "react";
+import { useModalData, useSelectedCard } from "../../store";
 import { truncateString } from "../../utils/correctors";
 import {
   CardContainer,
@@ -9,20 +10,45 @@ import {
   TitleBox,
 } from "./BeerCard.styled";
 
-const BeerCard = ({ displayBeer, isModal, setIsModal }) => {
+const BeerCard = ({ displayBeer, isModal, setIsModal, setIsSelecte }) => {
+  const [objectCard, setObjectCard] = useState(displayBeer);
+
   const description = truncateString(displayBeer?.description);
 
+  const { selectedCard, addCard, filterCard } = useSelectedCard((state) => ({
+    selectedCard: state.selectedCard,
+    addCard: state.addCard,
+    filterCard: state.filterCard,
+  }));
   const { recornInform } = useModalData((state) => ({
     recornInform: state.recornInform,
   }));
 
   const handleClick = () => {
     setIsModal(!isModal);
-    recornInform(displayBeer);
+    recornInform(objectCard);
   };
 
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    const findObject = selectedCard.find((el) => el.id === objectCard.id);
+
+    findObject
+      ? setObjectCard({ ...objectCard, border: false })
+      : setObjectCard({ ...objectCard, border: true });
+    findObject ? filterCard(objectCard) : addCard(objectCard);
+  };
+
+  useEffect(() => {
+    selectedCard.length > 0 ? setIsSelecte(true) : setIsSelecte(false);
+  }, [selectedCard]);
+
   return (
-    <CardContainer onClick={handleClick}>
+    <CardContainer
+      onClick={handleClick}
+      onContextMenu={handleContextMenu}
+      className={objectCard.border && "border"}
+    >
       <TitleBox>
         <TitleCard>{displayBeer?.name}</TitleCard>
         <TextCard>{displayBeer?.tagline}</TextCard>

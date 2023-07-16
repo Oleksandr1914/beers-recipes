@@ -11,6 +11,19 @@ export const useBeersRecipes = create((set, get) => ({
       const displayRecipes = state.beers.slice(startIndex, endIndex);
       return { displayBeers: [...displayRecipes] };
     }),
+  filterBeers: (selecttedArray) =>
+    set((state) => {
+      const uniqueElements = get().beers.filter((element) => {
+        const duplicateElement = selecttedArray.find(
+          (el) => el.id === element.id
+        );
+        if (!duplicateElement) {
+          return element;
+        }
+      });
+
+      return { beers: [...uniqueElements] };
+    }),
   calcFetch: () =>
     set({
       numberFetch: get().numberFetch + 1,
@@ -35,5 +48,21 @@ export const useModalData = create((set) => ({
   recornInform: (data) =>
     set({
       informationCard: data,
+    }),
+}));
+
+export const useSelectedCard = create((set, get) => ({
+  selectedCard: [],
+  addCard: (data) =>
+    set({
+      selectedCard: [...get().selectedCard, data],
+    }),
+  filterCard: (data) =>
+    set({
+      selectedCard: get().selectedCard.filter((el) => data.id !== el.id),
+    }),
+  cleanrCard: (data) =>
+    set({
+      selectedCard: [],
     }),
 }));

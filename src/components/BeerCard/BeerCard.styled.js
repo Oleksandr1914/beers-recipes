@@ -1,18 +1,24 @@
 import { styled } from "styled-components";
 
-export const CardContainer = styled.li`
+export const CardContainer = styled.li.attrs((props) => ({
+  className: props.className,
+}))`
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 12px;
   width: 240px;
-  height: 360px;
+  height: 380px;
   padding: 10px 14px;
   padding-bottom: 35px;
   border-radius: 20px;
   background-color: #c7967db5;
   &:hover {
     cursor: pointer;
+  }
+  &.border {
+    border: 2px solid red;
   }
 `;
 

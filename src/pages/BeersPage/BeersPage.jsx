@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useBeersRecipes } from "../../store";
+import { useBeersRecipes, useSelectedCard } from "../../store";
 import BeerCard from "../../components/BeerCard/BeerCard";
 import { BeersPageContainer, BeersList } from "./BeersPage.styled";
 import Modal from "../../components/Modal/Modal";
+import Button from "../../components/Button/Button";
 
 const BeersPage = () => {
   const [isModal, setIsModal] = useState(false);
+  const [isSelecte, setIsSelecte] = useState(false);
+
   const {
     beersRecipes,
     displayBeers,
@@ -22,6 +25,10 @@ const BeersPage = () => {
     sliceBeers: state.sliceBeers,
   }));
 
+  const { selectedCard } = useSelectedCard((state) => ({
+    selectedCard: state.selectedCard,
+  }));
+
   useEffect(() => {
     if (beersRecipes.length === 0) {
       fetchBeers(numberFetch);
@@ -33,13 +40,17 @@ const BeersPage = () => {
     if (displayBeers.length < 15) {
       calcFetch();
     }
-    console.log("123", displayBeers);
   }, [sliceBeers, beersRecipes]);
 
-  // console.log(beersRecipes, numberFetch);
-  console.log(displayBeers);
+  useEffect(() => {
+    if (beersRecipes.length < 15) {
+      fetchBeers(numberFetch);
+    }
+  }, [beersRecipes]);
+
   return (
     <BeersPageContainer>
+      {selectedCard.length > 0 && <Button />}
       <BeersList>
         {displayBeers?.map((el) => (
           <BeerCard
@@ -47,6 +58,7 @@ const BeersPage = () => {
             displayBeer={el}
             isModal={isModal}
             setIsModal={setIsModal}
+            setIsSelecte={setIsSelecte}
           />
         ))}
       </BeersList>
