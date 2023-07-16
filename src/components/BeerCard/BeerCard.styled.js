@@ -14,6 +14,7 @@ export const CardContainer = styled.li.attrs((props) => ({
   padding-bottom: 35px;
   border-radius: 20px;
   background-color: #c7967db5;
+  border: 2px solid transparent;
   &:hover {
     cursor: pointer;
   }
