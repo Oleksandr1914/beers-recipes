@@ -2,8 +2,14 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 export const ContainerHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 20px;
+  background-color: #2b1a1438;
+  backdrop-filter: blur(1px);
+  box-shadow: 0px 0px 4px 0px #000000;
 `;
 
 export const NavList = styled.ul`

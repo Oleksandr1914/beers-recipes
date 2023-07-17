@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import Beer from "../src/assets/beer.jpg";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -28,11 +27,24 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #212121;
     color: #e2e8f0;
 
-    background-image: linear-gradient(90deg, rgba(6,1,1,0.68) 0%, rgba(3,15,20,0.69) 100%),url(${Beer}) ;
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
+    
+    &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #c7967d33;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ad846f99;
+    border-radius: 8px;
+  }
 
   }
+  .no-scroll {
+  overflow: hidden !important;
+}
 
   input:-webkit-autofill,
 input:-webkit-autofill:hover,

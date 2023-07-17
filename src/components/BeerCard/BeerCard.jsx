@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useModalData, useSelectedCard } from "../../store";
 import { truncateString } from "../../utils/correctors";
 import {
@@ -10,7 +10,7 @@ import {
   TitleBox,
 } from "./BeerCard.styled";
 
-const BeerCard = ({ displayBeer, isModal, setIsModal, setIsSelecte }) => {
+const BeerCard = ({ displayBeer, isModal, setIsModal }) => {
   const [objectCard, setObjectCard] = useState(displayBeer);
 
   const description = truncateString(displayBeer?.description);
@@ -38,10 +38,6 @@ const BeerCard = ({ displayBeer, isModal, setIsModal, setIsSelecte }) => {
       : setObjectCard({ ...objectCard, border: true });
     findObject ? filterCard(objectCard) : addCard(objectCard);
   };
-
-  useEffect(() => {
-    selectedCard.length > 0 ? setIsSelecte(true) : setIsSelecte(false);
-  }, [selectedCard]);
 
   return (
     <CardContainer

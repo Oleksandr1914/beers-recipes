@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const ButtonDete = styled.button`
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 60px;
   padding-left: 38px;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useBeersRecipes, useSelectedCard } from "../../store";
+import { useBeersRecipes, useNumberCard, useSelectedCard } from "../../store";
 import BeerCard from "../../components/BeerCard/BeerCard";
 import { BeersPageContainer, BeersList } from "./BeersPage.styled";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
+import debounce from "lodash.debounce";
 
 const BeersPage = () => {
   const [isModal, setIsModal] = useState(false);
-  const [isSelecte, setIsSelecte] = useState(false);
 
   const {
     beersRecipes,
@@ -29,41 +29,57 @@ const BeersPage = () => {
     selectedCard: state.selectedCard,
   }));
 
+  const { numberCard, calcNumber } = useNumberCard((state) => ({
+    numberCard: state.numberCard,
+    calcNumber: state.calcNumber,
+  }));
+
   useEffect(() => {
     if (beersRecipes.length === 0) {
       fetchBeers(numberFetch);
     }
-  }, [fetchBeers, numberFetch]);
+  }, []);
 
   useEffect(() => {
-    sliceBeers(0);
-    if (displayBeers.length < 15) {
+    sliceBeers(numberCard);
+    if ((displayBeers.length < 15) & (displayBeers.length !== 0)) {
       calcFetch();
     }
-  }, [sliceBeers, beersRecipes]);
-
-  useEffect(() => {
-    if (beersRecipes.length < 15) {
+    if ((displayBeers.length < 15) & (displayBeers.length !== 0)) {
       fetchBeers(numberFetch);
     }
-  }, [beersRecipes]);
+  }, [beersRecipes, numberCard]);
+
+  function scrollListener(e) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 3
+    ) {
+      calcNumber(window.innerHeight + window.scrollY);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", debounce(scrollListener, 300));
+  }, [debounce]);
 
   return (
-    <BeersPageContainer>
-      {selectedCard.length > 0 && <Button />}
-      <BeersList>
-        {displayBeers?.map((el) => (
-          <BeerCard
-            key={el.id}
-            displayBeer={el}
-            isModal={isModal}
-            setIsModal={setIsModal}
-            setIsSelecte={setIsSelecte}
-          />
-        ))}
-      </BeersList>
-      {isModal && <Modal setIsModal={setIsModal} />}
-    </BeersPageContainer>
+    <>
+      <BeersPageContainer id="beers">
+        {selectedCard.length > 0 && <Button />}
+        <BeersList id="list">
+          {displayBeers?.map((el) => (
+            <BeerCard
+              key={el.id}
+              displayBeer={el}
+              isModal={isModal}
+              setIsModal={setIsModal}
+            />
+          ))}
+        </BeersList>
+        {isModal && <Modal setIsModal={setIsModal} />}
+      </BeersPageContainer>
+    </>
   );
 };
 

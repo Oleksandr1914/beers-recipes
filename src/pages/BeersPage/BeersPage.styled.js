@@ -1,26 +1,21 @@
 import styled from "styled-components";
+import Beer from "../../assets/beer.jpg";
 
 export const BeersPageContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 40px 20px;
+  padding-top: 120px;
   width: 100%;
-  height: calc(100vh - 100px);
-  overflow-x: hidden;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: 7px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #c7967d33;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #ad846f99;
-    border-radius: 8px;
-  }
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      rgba(6, 1, 1, 0.68) 0%,
+      rgba(3, 15, 20, 0.69) 100%
+    ),
+    url(${Beer});
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 `;
 
 export const BeersList = styled.ul`

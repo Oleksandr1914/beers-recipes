@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   height: 100vh;
   opacity: 1;
   padding: 0;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,6 @@ export const ModalCard = styled.div`
   width: 920px;
   height: 680px;
   background-color: #c7967d;
-  border-radius: 8px;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {

@@ -51,6 +51,14 @@ export const useModalData = create((set) => ({
     }),
 }));
 
+export const useNumberCard = create((set, get) => ({
+  numberCard: 0,
+  calcNumber: () =>
+    set({
+      numberCard: get().numberCard + 5,
+    }),
+}));
+
 export const useSelectedCard = create((set, get) => ({
   selectedCard: [],
   addCard: (data) =>
