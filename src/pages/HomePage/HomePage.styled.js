@@ -3,7 +3,7 @@ import Beer from "../../assets/beer.jpg";
 
 export const ContainerHome = styled.div`
   padding: 30px;
-  padding-top: 180px;
+  padding-top: 300px;
   height: 100vh;
   background-image: linear-gradient(
       90deg,
