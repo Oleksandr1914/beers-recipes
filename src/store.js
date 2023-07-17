@@ -22,7 +22,19 @@ export const useBeersRecipes = create((set, get) => ({
         }
       });
 
-      return { beers: [...uniqueElements] };
+      const fiteredDisplayBeers = get().displayBeers.filter((element) => {
+        const duplicateElement = selecttedArray.find(
+          (el) => el.id === element.id
+        );
+        if (!duplicateElement) {
+          return element;
+        }
+      });
+
+      return {
+        beers: [...uniqueElements],
+        displayBeers: [...fiteredDisplayBeers],
+      };
     }),
   calcFetch: () =>
     set({
